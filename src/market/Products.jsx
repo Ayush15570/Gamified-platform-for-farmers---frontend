@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import axiosInstance from "../utils/axiosInstance";
 import Purchased from "./Purchased";
+import { useNavigate } from "react-router-dom";
 // Imported Images
 import image1 from "../assets/image1.png";
 import image2 from "../assets/image2.png";
@@ -28,6 +29,7 @@ const productImages = {
 const fallbackImage = image9;
 
 const Products = () => {
+  const navigate = useNavigate()
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [redeeming, setRedeeming] = useState(null);
@@ -105,11 +107,11 @@ const Products = () => {
 {/* Go to Purchased Page */}
 <div className="text-center mb-8">
   <button
-    onClick={() => window.location.href = "/purchased"}
-    className="px-6 py-3 bg-gradient-to-r from-lime-400 to-cyan-400 text-black font-semibold rounded-xl shadow-lg hover:scale-105 transition-all"
-  >
-    📦 View My Purchases
-  </button>
+        onClick={() => navigate("/purchased")}
+        className="px-6 py-3 bg-gradient-to-r from-lime-400 to-cyan-400 text-black font-semibold rounded-xl shadow-lg hover:scale-105 transition-all"
+      >
+        📦 View My Purchases
+      </button>
 </div>
 
 
