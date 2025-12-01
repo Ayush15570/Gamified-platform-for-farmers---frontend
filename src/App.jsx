@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login, logout } from "./store/authSlice";
 import authService from "./utils/authService";
+import { useSelector } from "react-redux";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
@@ -13,6 +14,7 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation(); // ✅ To detect current route
 const [openAI, setOpenAI] = useState(false);
+const authStatus = useSelector((state) => state.auth.status)
   useEffect(() => {
     authService
       .getCurrentUser()
@@ -40,8 +42,8 @@ const [openAI, setOpenAI] = useState(false);
         <Outlet />
       </main>
 
-      {!isAdminRoute && <Footer />}
-              { !isAdminRoute && (
+      { !isAdminRoute && <Footer />}
+              { authStatus &&!isAdminRoute && (
           <FloatingAIButton openModal={() => setOpenAI(true)} />
         )}
 
